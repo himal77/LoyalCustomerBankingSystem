@@ -10,19 +10,18 @@ public class Customer {
     private String name;
     private String address;
     private float currentBalance;
-    private int senderId;
     private String password;
 
-    public Customer(int accountNo, String name, String address, float currentBalance, int senderId, String password) {
+
+    public Customer() {
+    }
+
+    public Customer(int accountNo, String name, String address, float currentBalance, String password) {
         this.accountNo = accountNo;
         this.name = name;
         this.address = address;
         this.currentBalance = currentBalance;
-        this.senderId = senderId;
         this.password = password;
-    }
-
-    public Customer() {
     }
 
     public int getAccountNo() {
@@ -57,14 +56,6 @@ public class Customer {
         this.currentBalance = currentBalance;
     }
 
-    public int getSenderId() {
-        return senderId;
-    }
-
-    public void setSenderId(int senderId) {
-        this.senderId = senderId;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -80,7 +71,6 @@ public class Customer {
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", currentBalance=" + currentBalance +
-                ", senderId=" + senderId +
                 ", password='" + password + '\'' +
                 '}';
     }

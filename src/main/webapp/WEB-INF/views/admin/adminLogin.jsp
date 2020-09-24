@@ -15,7 +15,7 @@
       <div class="card">
         <div class="card-body px-5" style="background-color:#7578d9">
           <h3 class="text-center my-3">Admin Login</h3>
-          <form action="admin" method="post">
+          <form action="adminPanel" method="post">
             <div class="form-group">
               <label for="username">Admin Username</label>
               <input name="userName" type="text" class="form-control"
@@ -37,6 +37,5 @@
     </div>
   </div>
 </div>
-
 </body>
 </html>

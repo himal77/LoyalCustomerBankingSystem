@@ -15,7 +15,7 @@
       <div class="card">
         <div class="card-body px-5" style="background-color:#1bc44e">
           <h3 class="text-center my-3">Customer Login</h3>
-          <form action="customer" method="post">
+          <form action="customerPanel" method="post">
             <div class="form-group">
               <label for="accountNumber">Customer Account Number</label>
               <input name="user_email" type="number" class="form-control"
