@@ -5,9 +5,13 @@ import com.rbinternational.model.Customer;
 import com.rbinternational.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class AdminController {
@@ -38,13 +42,14 @@ public class AdminController {
     }
 
     @RequestMapping("/checkCustomer")
-    public String checkCustomer() {
-        return "admin/addCustomer";
+    public String checkCustomer(Model model) {
+        List<Customer> customerList = adminService.getCustomerList();
+        model.addAttribute("customerList", customerList);
+        return "admin/checkCustomer";
     }
 
     @RequestMapping("/adminLogout")
     public String adminLogout() {
-
         return "redirect:home";
     }
 
@@ -52,5 +57,24 @@ public class AdminController {
     public String registerCustomer(@ModelAttribute Customer customer) {
         if(adminService.addCustomer(customer) == 1) return "redirect:adminPanel";
         return "redirect:addCustomer";
+    }
+
+    @RequestMapping("/deleteCustomerReq")
+    public String deleteCustomer(@RequestParam("accountNo") int accountNo) {
+        adminService.deleteCustomer(accountNo);
+        return "redirect:checkCustomer";
+    }
+
+    @RequestMapping("/updateCustomerReq")
+    public String updateCustomer(@RequestParam("accountNo") int accountNo, Model model) {
+       Customer customer = adminService.getCustomer(accountNo);
+       model.addAttribute("customer", customer);
+        return "admin/updateCustomer";
+    }
+
+    @RequestMapping(value = "/updateCustomer", method = RequestMethod.POST)
+    public String updateCustomer(@ModelAttribute Customer customer) {
+        adminService.updateCustomer(customer);
+        return "redirect:checkCustomer";
     }
 }

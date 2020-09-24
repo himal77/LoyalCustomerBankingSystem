@@ -21,15 +21,28 @@ public class CustomerDAOImpl implements CustomerDAO {
         if(hibernateTemplate.save(customer) == null) return 0;
         return 1;
     }
-    public void delete(int accountNumber) {
 
+    @Transactional
+    public void delete(int accountNo) {
+        Customer customer = new Customer();
+        customer.setAccountNo(accountNo);
+        hibernateTemplate.delete(customer);
     }
-    public Customer getSingleCustomer(int accountNumber) {
-        return null;
+
+    @Transactional
+    public void update(Customer customer) {
+        hibernateTemplate.update(customer);
     }
-    public List<Customer> getAllCustomer() {
-        return null;
+
+    public Customer getCustomer(int accountNo) {
+        return hibernateTemplate.get(Customer.class, accountNo);
     }
+
+    public List<Customer> getCustomerList() {
+        List<Customer> customerList = hibernateTemplate.loadAll(Customer.class);
+        return customerList;
+    }
+
     public Customer getCustomerByAccNoAndPassword(int accountNo, String password) {
         return null;
     }

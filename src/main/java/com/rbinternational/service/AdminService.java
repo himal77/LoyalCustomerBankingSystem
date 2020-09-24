@@ -7,6 +7,8 @@ import com.rbinternational.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AdminService {
 
@@ -21,5 +23,20 @@ public class AdminService {
     }
     public int addCustomer(Customer customer) {
         return customerService.registerCustomer(customer);
+    }
+    public List<Customer> getCustomerList() {
+       return customerService.getCustomerList();
+    }
+
+    public void deleteCustomer(int accountNo) {
+        customerService.deleteCustomer(accountNo);
+    }
+
+    public Customer getCustomer(int accountNo) {
+        return customerService.getCustomer(accountNo);
+    }
+
+    public void updateCustomer(Customer customer) {
+        customerService.updateCustomer(customer);
     }
 }
