@@ -32,4 +32,8 @@ public class CustomerService {
     public void updateCustomer(Customer customer) {
         customerDAO.update(customer);
     }
+
+    public Customer getCustomerByAccountNoAndPassword(int accountNo, String password) {
+        return customerDAO.getCustomerByAccNoAndPassword(accountNo, password);
+    }
 }

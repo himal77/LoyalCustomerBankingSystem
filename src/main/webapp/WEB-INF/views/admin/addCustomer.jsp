@@ -4,6 +4,7 @@
 </head>
 <div class="container w-50">
     <div class="container-fluid">
+        <%@include file="/WEB-INF/views/message.jsp"%>
         <div class="card-body">
             <form action="registerCustomer" method="post">
                 <div class="form-group">

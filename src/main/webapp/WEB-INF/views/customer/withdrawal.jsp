@@ -1,8 +1,5 @@
-<%--
-  Created By Puri_Himal
---%>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page isELIgnored="false" %>
 <html>
 
 <head>
@@ -15,21 +12,22 @@
     <div class="col-md-4 offset-md-4">
       <div class="card">
         <div class="card-body px-5" style="background-color:#7578d9">
-          <h3 class="text-center my-3">Admin Login</h3>
-          <form action="adminPanel" method="post">
+          <h3 class="text-center my-3">Deposit</h3>
+          <form action="doDeposit" method="post">
             <div class="form-group">
-              <label for="username">Admin Username</label>
-              <input name="userName" type="text" class="form-control"
-                     id="username" placeholder="Enter user username">
+              <label for="amount">Amount</label>
+              <input name="amount" step="0.01" type="number" class="form-control"
+                     id="amount" placeholder="Enter the amount">
             </div>
 
             <div class="form-group">
-              <label for="password">Admin Password</label>
-              <input name="password" type="password" class="form-control"
-                     id="password" placeholder="Enter user password">
+              <label for="date">Date</label>
+              <input name="date" type="date" class="form-control"
+                     id="date" placeholder="Enter user password">
             </div>
+            <input type="hidden" name="accountNo" value=${accountNo}>
             <div class="container text-center">
-              <button type="submit" class="btn btn-info">Login</button>
+              <button type="submit" class="btn btn-info">Deposit</button>
               <button type="reset" class="btn btn-info">Reset</button>
             </div>
           </form>
@@ -40,3 +38,4 @@
 </div>
 </body>
 </html>
+

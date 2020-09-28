@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page isELIgnored="false" %>
 <html>
 <head>
     <title>Title</title>
@@ -10,6 +11,7 @@
     <div class="row mt-3">
         <div class="offset-md-4">
             <div class="card">
+                <%@include file="/WEB-INF/views/message.jsp" %>
                 <div class="card-body px-2" style="background-color:#7578d9">
                     <h3 class="text-center my-3">Admin Panel</h3>
 

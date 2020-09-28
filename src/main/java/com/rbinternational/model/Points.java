@@ -1,26 +1,25 @@
 package com.rbinternational.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Points {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int pointId;
-    private int customerAccount;
     private int currPoint;
     private int usedPoint;
     private int totalPoint;
+
+    @ManyToOne
+    private Customer customerAccount;
 
     public Points() {
     }
 
     public Points(int pointId, int customerAccount, int currPoint, int usedPoint, int totalPoint) {
         this.pointId = pointId;
-        this.customerAccount = customerAccount;
         this.currPoint = currPoint;
         this.usedPoint = usedPoint;
         this.totalPoint = totalPoint;
@@ -32,14 +31,6 @@ public class Points {
 
     public void setPointId(int pointId) {
         this.pointId = pointId;
-    }
-
-    public int getCustomerAccount() {
-        return customerAccount;
-    }
-
-    public void setCustomerAccount(int customerAccount) {
-        this.customerAccount = customerAccount;
     }
 
     public int getCurrPoint() {

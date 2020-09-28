@@ -4,9 +4,9 @@ import com.rbinternational.dao.interfaces.CustomerDAO;
 import com.rbinternational.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Transactional
     public int register(Customer customer) {
-        if(hibernateTemplate.save(customer) == null) return 0;
+        if (hibernateTemplate.save(customer) == null) return 0;
         return 1;
     }
 
@@ -44,6 +44,9 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     public Customer getCustomerByAccNoAndPassword(int accountNo, String password) {
+        List<Customer> customerList = (List<Customer>) hibernateTemplate.find("FROM Customer c where c.accountNo = ?0 and c.password = ?1",
+                accountNo, password);
+        if(customerList.size() != 0) return customerList.get(0);
         return null;
     }
 }

@@ -31,8 +31,8 @@ public class AdminController {
         return "admin/adminPanel";
     }
 
-    @RequestMapping(value = "/adminPanel")
-    public String adminLoginGet() {
+    @RequestMapping(value = "/adminPanel", method = RequestMethod.GET)
+    public String adminLoginPost() {
         return "admin/adminPanel";
     }
 
@@ -54,9 +54,13 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/registerCustomer", method = RequestMethod.POST)
-    public String registerCustomer(@ModelAttribute Customer customer) {
-        if(adminService.addCustomer(customer) == 1) return "redirect:adminPanel";
-        return "redirect:addCustomer";
+    public String registerCustomer(@ModelAttribute Customer customer, Model m) {
+
+        if(adminService.addCustomer(customer) == 1){
+            return "redirect:checkCustomer";
+        }
+        m.addAttribute("msg", "Customer addition unsuccessful");
+        return "message";
     }
 
     @RequestMapping("/deleteCustomerReq")

@@ -1,16 +1,53 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: puri
-  Date: 9/24/20
-  Time: 3:02 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page isELIgnored="false" %>
 <html>
-  <head>
+<head>
     <title>Title</title>
+    <%@include file="/components/common.jsp" %>
 </head>
-  <body>
-  This is customer
-  </body>
+<body>
+<body style="background-color:#7578d9">
+<div class="container-fluid">
+    <div class="row mt-3">
+        <div class="offset-md-3">
+            <div class="card">
+                <div class="card-body px-2" style="background-color:#7578d9">
+                    <h3 class="text-center my-3">Customer Panel</h3>
+
+                    <div class="form-row">
+
+                        <form action="addCustomer" class="align-self-md-center">
+                            <input type="hidden" name="accountNo" value=${accountNo}>
+                            <button type="submit" class="btn btn-secondary btn-lg">
+                                View Points
+                            </button>
+                        </form>
+
+                        <form action="checkCustomer" class="align-self-md-center">
+                            <input type="hidden" name="accountNo" value=${accountNo}>
+                            <button type="submit" class="btn btn-secondary btn-lg">
+                                View Transaction
+                            </button>
+                        </form>
+
+                        <form action="transaction" class="align-self-md-center">
+                            <input type="hidden" name="accountNo" value=${accountNo}>
+                            <button type="submit" class="btn btn-secondary btn-lg">
+                                Do Transaction
+                            </button>
+                        </form>
+
+                        <form action="adminLogout" class="align-self-md-center">
+                            <button type="submit" class="btn btn-secondary btn-lg">
+                                Logout
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
 </html>

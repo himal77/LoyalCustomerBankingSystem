@@ -27,8 +27,8 @@
                         <td>${customer.address}</td>
                         <td>${customer.currentBalance}</td>
                         <td>
-                            <div class="form-row" onsubmit="return confirm('Do you really want to delete?');">
-                                <form action="deleteCustomerReq">
+                            <div class="form-row" >
+                                <form action="deleteCustomerReq" onsubmit="return confirm('Do you really want to delete?');">
                                     <input type="hidden" name="accountNo" value=${customer.accountNo}>
                                     <button type="submit">Delete</button>
                                 </form>

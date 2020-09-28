@@ -2,6 +2,8 @@ package com.rbinternational.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 public class Customer {
@@ -12,6 +14,11 @@ public class Customer {
     private float currentBalance;
     private String password;
 
+    @OneToMany(mappedBy = "customerAccount")
+    private List<Points> pointsList;
+
+    @OneToMany(mappedBy = "senderAccountNo")
+    private List<Transaction> transactionList;
 
     public Customer() {
     }

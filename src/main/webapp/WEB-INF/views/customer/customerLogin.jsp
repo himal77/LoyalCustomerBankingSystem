@@ -17,9 +17,9 @@
           <h3 class="text-center my-3">Customer Login</h3>
           <form action="customerPanel" method="post">
             <div class="form-group">
-              <label for="accountNumber">Customer Account Number</label>
-              <input name="user_email" type="number" class="form-control"
-                     id="accountNumber" placeholder="Enter user account number">
+              <label for="accountNo">Customer Account Number</label>
+              <input name="accountNo" type="number" class="form-control"
+                     id="accountNo" placeholder="Enter user account number">
             </div>
 
             <div class="form-group">
