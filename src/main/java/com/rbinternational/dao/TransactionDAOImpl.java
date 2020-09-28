@@ -1,6 +1,7 @@
 package com.rbinternational.dao;
 
 import com.rbinternational.dao.interfaces.TransactionDAO;
+import com.rbinternational.model.Customer;
 import com.rbinternational.model.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
@@ -29,7 +30,14 @@ public class TransactionDAOImpl implements TransactionDAO {
         return null;
     }
 
-    public List<Transaction> getTransactionByAccountNumber(int accountNo) {
-        return null;
+    @Transactional
+    public List<Transaction> getTransactionByAccountNumber(Customer customer) {
+        List<Transaction> transactionList =
+                (List<Transaction>) hibernateTemplate.find
+                        ("FROM Transaction t where t.senderAccountNo = ?0",
+                customer);
+        System.out.println("The length of transaction list is: " + transactionList.size());
+
+        return transactionList;
     }
 }

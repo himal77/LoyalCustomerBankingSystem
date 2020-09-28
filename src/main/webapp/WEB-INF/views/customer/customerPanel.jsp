@@ -11,7 +11,7 @@
     <div class="row mt-3">
         <div class="offset-md-3">
             <div class="card">
-                <div class="card-body px-2" style="background-color:#7578d9">
+                <div class="card-body px-2" style="background-color:#bd4e44">
                     <h3 class="text-center my-3">Customer Panel</h3>
 
                     <div class="form-row">
@@ -23,7 +23,7 @@
                             </button>
                         </form>
 
-                        <form action="checkCustomer" class="align-self-md-center">
+                        <form action="viewTransaction" class="align-self-md-center">
                             <input type="hidden" name="accountNo" value=${accountNo}>
                             <button type="submit" class="btn btn-secondary btn-lg">
                                 View Transaction
@@ -36,14 +36,14 @@
                                 Do Transaction
                             </button>
                         </form>
-
-                        <form action="adminLogout" class="align-self-md-center">
-                            <button type="submit" class="btn btn-secondary btn-lg">
+                    </div>
+                    <div class="offset-md-5">
+                        <form action="customerButton" class="align-self-md-center">
+                            <button type="submit" class="btn btn-primary btn-lg">
                                 Logout
                             </button>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>

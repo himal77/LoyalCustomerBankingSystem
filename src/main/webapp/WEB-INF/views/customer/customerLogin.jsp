@@ -32,6 +32,13 @@
               <button type="reset" class="btn btn-info">Reset</button>
             </div>
           </form>
+          <div class="offset-md-4">
+            <form action="home" class="align-self-md-center">
+              <button type="submit" class="btn btn-primary btn-sm">
+                Home
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
