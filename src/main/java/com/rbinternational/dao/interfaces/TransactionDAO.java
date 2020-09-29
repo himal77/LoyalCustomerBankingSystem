@@ -9,5 +9,6 @@ public interface TransactionDAO {
     public int insert(Transaction transaction);
     public List<Transaction> getTransactionList();
     public Transaction getTransaction(int transactionId);
-    public List<Transaction> getTransactionByAccountNumber(Customer customer);
+    public List<Transaction> getSentTransactionByAccountNumber(Customer customer);
+    public List<Transaction> getReceivedTransactionByAccountNumber(Customer customer);
 }

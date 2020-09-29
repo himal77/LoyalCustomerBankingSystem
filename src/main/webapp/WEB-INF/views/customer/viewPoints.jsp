@@ -12,28 +12,30 @@
             <table class="table table-borderless table-dark">
                 <thead>
                 <tr>
-                    <th scope="col">Date</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Receiver</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Used</th>
+                    <th scope="col">Dismissed</th>
+                    <th scope="col">Current</th>
+                    <th scope="col">Operation</th>
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${transactionList}" var="transaction">
-                <tr>
-                    <td>${transaction.date}</td>
-                    <td>${transaction.amount}</td>
-                    <td>${transaction.type}</td>
-                    <td>${transaction.receiverAccountNo.accountNo}</td>
-                </tr>
-                </c:forEach>
-                <tr class="bg-info">
-                <tfoot>
-                <td>Total Amount: ${currentBalance}</td>
-                <td>Outgoing: ${outgoing}</td>
-                <td>Incoming: ${incoming}</td>
-                </tfoot>
-                </tr>
+                    <tr>
+                        <td>${points.totalGatheredPoints}</td>
+                        <td>${points.usedPoints}</td>
+                        <td>${points.dismissedPoints}</td>
+                        <td>${points.currAvailablePoints}</td>
+                        <c:if test="${points.currAvailablePoints > 0}">
+                        <td>
+                            <div class="form-row" >
+                                <form action="collectPoints">
+                                    <input type="hidden" name="accountNo" value=${accountNo}>
+                                    <button type="submit">Collect</button>
+                                </form>
+                            </div>
+                        </td>
+                        </c:if>
+                    </tr>
                 </tbody>
             </table>
             <div class="offset-md-5">

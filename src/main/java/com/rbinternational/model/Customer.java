@@ -3,6 +3,8 @@ package com.rbinternational.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -13,12 +15,16 @@ public class Customer {
     private String address;
     private float currentBalance;
     private String password;
+    private Date countPointFromDate;
 
     @OneToMany(mappedBy = "customerAccount")
-    private List<Points> pointsList;
+    private List<PointsHistory> pointsHistoryList;
 
     @OneToMany(mappedBy = "senderAccountNo")
     private List<Transaction> transactionList;
+
+//    @OneToOne(mappedBy = "customerAccountNo")
+//    private Points points;
 
     public Customer() {
     }
@@ -69,6 +75,14 @@ public class Customer {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Date getCountPointFromDate() {
+        return countPointFromDate;
+    }
+
+    public void setCountPointFromDate(Date countPointFromDate) {
+        this.countPointFromDate = countPointFromDate;
     }
 
     @Override

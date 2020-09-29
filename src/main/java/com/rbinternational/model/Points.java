@@ -1,70 +1,101 @@
 package com.rbinternational.model;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 public class Points {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int pointId;
-    private int currPoint;
-    private int usedPoint;
-    private int totalPoint;
 
-    @ManyToOne
-    private Customer customerAccount;
+    @Id
+    private int customerAccountNo;
+
+    private float currAvailablePoints;
+    private float usedPoints;
+    private float totalGatheredPoints;
+    private float dismissedPoints;
+    private Date lastDateOfTransaction;
+    private float transactionTillNow;
 
     public Points() {
     }
 
-    public Points(int pointId, int customerAccount, int currPoint, int usedPoint, int totalPoint) {
-        this.pointId = pointId;
-        this.currPoint = currPoint;
-        this.usedPoint = usedPoint;
-        this.totalPoint = totalPoint;
+    public Points(int customerAccountNo, float currAvailablePoints, float usedPoints, float totalGatheredPoints, float dismissedPoints, Date lastDateOfTransaction, float transactionTillNow) {
+        this.customerAccountNo = customerAccountNo;
+        this.currAvailablePoints = currAvailablePoints;
+        this.usedPoints = usedPoints;
+        this.totalGatheredPoints = totalGatheredPoints;
+        this.dismissedPoints = dismissedPoints;
+        this.lastDateOfTransaction = lastDateOfTransaction;
+        this.transactionTillNow = transactionTillNow;
     }
 
-    public int getPointId() {
-        return pointId;
+    public int getCustomerAccountNo() {
+        return customerAccountNo;
     }
 
-    public void setPointId(int pointId) {
-        this.pointId = pointId;
+    public void setCustomerAccountNo(int customerAccountNo) {
+        this.customerAccountNo = customerAccountNo;
     }
 
-    public int getCurrPoint() {
-        return currPoint;
+    public float getCurrAvailablePoints() {
+        return currAvailablePoints;
     }
 
-    public void setCurrPoint(int currPoint) {
-        this.currPoint = currPoint;
+    public void setCurrAvailablePoints(float currAvailablePoints) {
+        this.currAvailablePoints = currAvailablePoints;
     }
 
-    public int getUsedPoint() {
-        return usedPoint;
+    public float getUsedPoints() {
+        return usedPoints;
     }
 
-    public void setUsedPoint(int usedPoint) {
-        this.usedPoint = usedPoint;
+    public void setUsedPoints(float usedPoints) {
+        this.usedPoints = usedPoints;
     }
 
-    public int getTotalPoint() {
-        return totalPoint;
+    public float getTotalGatheredPoints() {
+        return totalGatheredPoints;
     }
 
-    public void setTotalPoint(int totalPoint) {
-        this.totalPoint = totalPoint;
+    public void setTotalGatheredPoints(float totalGatheredPoints) {
+        this.totalGatheredPoints = totalGatheredPoints;
+    }
+
+    public float getDismissedPoints() {
+        return dismissedPoints;
+    }
+
+    public void setDismissedPoints(float dismissedPoints) {
+        this.dismissedPoints = dismissedPoints;
+    }
+
+    public Date getLastDateOfTransaction() {
+        return lastDateOfTransaction;
+    }
+
+    public void setLastDateOfTransaction(Date lastDateOfTransaction) {
+        this.lastDateOfTransaction = lastDateOfTransaction;
+    }
+
+    public float getTransactionTillNow() {
+        return transactionTillNow;
+    }
+
+    public void setTransactionTillNow(float transactionTillNow) {
+        this.transactionTillNow = transactionTillNow;
     }
 
     @Override
     public String toString() {
         return "Points{" +
-                "pointId=" + pointId +
-                ", customerAccount=" + customerAccount +
-                ", currPoint=" + currPoint +
-                ", usedPoint=" + usedPoint +
-                ", totalPoint=" + totalPoint +
+                "customerAccountNo=" + customerAccountNo +
+                ", currAvailablePoints=" + currAvailablePoints +
+                ", usedPoints=" + usedPoints +
+                ", totalGatheredPoints=" + totalGatheredPoints +
+                ", dismissedPoints=" + dismissedPoints +
+                ", lastDateOfTransaction=" + lastDateOfTransaction +
+                ", transactionTillNow=" + transactionTillNow +
                 '}';
     }
 }

@@ -18,7 +18,7 @@ public class TransactionDAOImpl implements TransactionDAO {
 
     @Transactional
     public int insert(Transaction transaction) {
-        if(hibernateTemplate.save(transaction) != null) return 1;
+        if (hibernateTemplate.save(transaction) != null) return 1;
         return 0;
     }
 
@@ -31,12 +31,20 @@ public class TransactionDAOImpl implements TransactionDAO {
     }
 
     @Transactional
-    public List<Transaction> getTransactionByAccountNumber(Customer customer) {
+    public List<Transaction> getSentTransactionByAccountNumber(Customer customer) {
         List<Transaction> transactionList =
                 (List<Transaction>) hibernateTemplate.find
                         ("FROM Transaction t where t.senderAccountNo = ?0",
-                customer);
-        System.out.println("The length of transaction list is: " + transactionList.size());
+                                customer);
+        return transactionList;
+    }
+
+    @Transactional
+    public List<Transaction> getReceivedTransactionByAccountNumber(Customer customer) {
+        List<Transaction> transactionList =
+                (List<Transaction>) hibernateTemplate.find
+                        ("FROM Transaction t where t.receiverAccountNo = ?0 AND t.type = ?1",
+                                customer, "Transfer");
 
         return transactionList;
     }

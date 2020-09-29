@@ -22,7 +22,11 @@ public class TransactionService {
         return transactionDAO.insert(transaction);
     }
 
-    public List<Transaction> getTransactionList(Customer customer) {
-        return transactionDAO.getTransactionByAccountNumber(customer);
+    public List<Transaction> getSentTransactionList(Customer customer) {
+        return transactionDAO.getSentTransactionByAccountNumber(customer);
     }
+    public List<Transaction> getReceivedTransactionList(Customer customer) {
+        return transactionDAO.getReceivedTransactionByAccountNumber(customer);
+    }
+
 }

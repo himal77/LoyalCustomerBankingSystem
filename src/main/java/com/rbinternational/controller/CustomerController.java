@@ -7,15 +7,11 @@ import com.rbinternational.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.xml.crypto.Data;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,6 +22,7 @@ public class CustomerController {
 
     @Autowired
     private TransactionService transactionService;
+
 
     @RequestMapping(value = "/customerPanel", method = RequestMethod.POST)
     public String getCustomer(@RequestParam("accountNo") int accountNo, @RequestParam("password") String password, Model model) {
@@ -63,117 +60,46 @@ public class CustomerController {
         return "customer/transfer";
     }
 
-    @RequestMapping("/doDeposit")
-    public String doDeposit(@RequestParam("amount") float amount,
-                            @RequestParam("date") String date,
-                            @RequestParam("accountNo") int accountNo,
-                            Model model) {
-        Date d = convertDate(date);
-
-        Customer customer = customerService.getCustomer(accountNo);
-        float previousAmount = customer.getCurrentBalance();
-        customer.setCurrentBalance(previousAmount + amount);
-        customerService.updateCustomer(customer);
-
-        Transaction transaction = new Transaction(amount, d, "Deposit", customer, customer);
-        transactionService.insertTransaction(transaction);
-
-        model.addAttribute("msg", "Successful Transaction");
-        model.addAttribute("accountNo", accountNo);
-
-        return "customer/deposit";
-    }
-
-    @RequestMapping("/doWithdrawal")
-    public String doWithdrawal(@RequestParam("amount") float amount,
-                               @RequestParam("date") String date,
-                               @RequestParam("accountNo") int accountNo,
-                               Model model) {
-        Date d = convertDate(date);
-
-        Customer customer = customerService.getCustomer(accountNo);
-        float previousAmount = customer.getCurrentBalance();
-
-        if (previousAmount < amount) {
-            model.addAttribute("msg", "Unsuccessful Transaction, Amount Not Enough");
-            model.addAttribute("accountNo", accountNo);
-            return "customer/withdrawal";
-        }
-
-        customer.setCurrentBalance(previousAmount - amount);
-        customerService.updateCustomer(customer);
-
-        Transaction transaction = new Transaction(amount * -1, d, "Withdrawal", customer, customer);
-        transactionService.insertTransaction(transaction);
-
-        model.addAttribute("msg", "Successful Transaction");
-        model.addAttribute("accountNo", accountNo);
-
-        return "customer/withdrawal";
-    }
-
-    @RequestMapping("/doTransfer")
-    public String doWithdrawal(@RequestParam("amount") float amount,
-                               @RequestParam("date") String date,
-                               @RequestParam("accountNo") int accountNo,
-                               @RequestParam("toAccountNo") int toAccountNo,
-                               Model model) {
-        Date d = convertDate(date);
-
-        Customer sender = customerService.getCustomer(accountNo);
-        Customer receiver = customerService.getCustomer(toAccountNo);
-
-        if(receiver == null) {
-            model.addAttribute("msg", "No Customer With AccountNo " + toAccountNo);
-            model.addAttribute("accountNo", accountNo);
-            return "customer/transfer";
-        }
-
-        float previousAmount = sender.getCurrentBalance();
-
-        if (previousAmount < amount) {
-            model.addAttribute("msg", "Unsuccessful Transaction, Amount Not Enough");
-            model.addAttribute("accountNo", accountNo);
-            return "customer/transfer";
-        }
-
-        sender.setCurrentBalance(previousAmount - amount);
-        receiver.setCurrentBalance(previousAmount + amount);
-
-        customerService.updateCustomer(sender);
-        customerService.updateCustomer(receiver);
-
-        Transaction transaction = new Transaction(amount * -1, d, "Withdrawal", sender, receiver);
-        transactionService.insertTransaction(transaction);
-
-        model.addAttribute("msg", "Successful Transaction");
-        model.addAttribute("accountNo", accountNo);
-
-        return "customer/transfer";
-    }
-
-    public Date convertDate(String d) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = null;
-        try {
-            date = formatter.parse(d);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return date;
-
-    }
-
+    // View transaction handler or controller
     @RequestMapping("/viewTransaction")
     public String viewTransaction(@RequestParam("accountNo") int accountNo, Model model) {
+
         Customer customer = customerService.getCustomer(accountNo);
-        List<Transaction> transactionList = transactionService.getTransactionList(customer);
+        List<Transaction> receivedTransactionList = transactionService.getReceivedTransactionList(customer);
+        List<Transaction> sentTransactionList = transactionService.getSentTransactionList(customer);
+
+        float outgoing = 0.0f;
+        float incoming = 0.0f;
+
+        for (Transaction t : sentTransactionList) {
+            if (t.getAmount() < 0) {
+                outgoing += (t.getAmount() * -1);   // Transferred and Withdrawal
+            } else {
+                incoming += t.getAmount();          // withdrawal
+            }
+
+        }
+
+        for (Transaction t : receivedTransactionList) {
+            t.setAmount(t.getAmount() * -1);
+            incoming += t.getAmount();       // Received from another account
+        }
+
+        // Combining both transaction
+        List<Transaction> transactionList = new ArrayList<>(sentTransactionList);
+        transactionList.addAll(receivedTransactionList);
+
+        // Setting attributes for view page to display
         model.addAttribute("transactionList", transactionList);
         model.addAttribute("accountNo", accountNo);
         model.addAttribute("password", customerService.getCustomer(accountNo).getPassword());
         model.addAttribute("currentBalance", customer.getCurrentBalance());
+        model.addAttribute("incoming", incoming);
+        model.addAttribute("outgoing", outgoing);
+
         return "customer/viewTransaction";
     }
+
 }
 
 

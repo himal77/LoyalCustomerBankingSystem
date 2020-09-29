@@ -16,7 +16,14 @@
 
                     <div class="form-row">
 
-                        <form action="addCustomer" class="align-self-md-center">
+                        <form action="viewAvailabePoints" class="align-self-md-center">
+                            <input type="hidden" name="accountNo" value=${accountNo}>
+                            <button type="submit" class="btn btn-secondary btn-lg">
+                                View Points History
+                            </button>
+                        </form>
+
+                        <form action="viewPoints" class="align-self-md-center">
                             <input type="hidden" name="accountNo" value=${accountNo}>
                             <button type="submit" class="btn btn-secondary btn-lg">
                                 View Points

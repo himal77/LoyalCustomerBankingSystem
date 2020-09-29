@@ -46,6 +46,7 @@
                 <value>com.rbinternational.model.Customer</value>
                 <value>com.rbinternational.model.Points</value>
                 <value>com.rbinternational.model.Transaction</value>
+                <value>com.rbinternational.model.PointsHistory</value>
             </list>
         </property>
     </bean>
