@@ -101,11 +101,3 @@ public class CustomerController {
     }
 
 }
-
-
-//                try {
-//            long diff = d.getTime() - lastTransactionDate.getTime();
-//            int durationFromLastTransaction = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }

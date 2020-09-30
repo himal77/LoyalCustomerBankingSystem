@@ -5,5 +5,6 @@ import com.rbinternational.model.Points;
 
 public interface PointsDAO {
     public Points getPointOfCustomer(int accountNo);
-    public int addPointsForNewCustomer(Points points);
+    public int save(Points points);
+    public void update(Points points);
 }

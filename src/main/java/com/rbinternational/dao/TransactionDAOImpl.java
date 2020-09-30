@@ -8,6 +8,7 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.sql.Date;
 import java.util.List;
 
 @Repository
@@ -46,6 +47,23 @@ public class TransactionDAOImpl implements TransactionDAO {
                         ("FROM Transaction t where t.receiverAccountNo = ?0 AND t.type = ?1",
                                 customer, "Transfer");
 
+        return transactionList;
+    }
+
+    public List<Transaction> getLastSevenDayOfSentTransaction(Customer customer, Date date) {
+        System.out.println(date);
+        List<Transaction> transactionList =
+                (List<Transaction>) hibernateTemplate.find
+                        ("FROM Transaction t where t.senderAccountNo = ?0 AND t.date >= ?1",
+                                customer, date);
+        return transactionList;
+    }
+
+    public List<Transaction> getLastSevenDayOfReceivedTransaction(Customer customer, Date date) {
+        List<Transaction> transactionList =
+                (List<Transaction>) hibernateTemplate.find
+                        ("FROM Transaction t where t.receiverAccountNo = ?0 AND t.date >= ?1 AND t.type = ?2",
+                                customer, date, "transfer");
         return transactionList;
     }
 }
