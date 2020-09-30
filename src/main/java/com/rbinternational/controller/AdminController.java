@@ -26,7 +26,10 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/adminPanel", method = RequestMethod.POST)
-    public String adminLoginPost(@ModelAttribute Admin admin) {
+    public String adminLoginPost(@ModelAttribute Admin admin, Model model) {
+        model.addAttribute("userName", admin.getUserName());
+        model.addAttribute("password", admin.getPassword());
+        model.addAttribute("admin", admin);
         if(this.adminService.getAdmin(admin) == null) return "redirect:adminButton";
         return "admin/adminPanel";
     }
@@ -37,20 +40,17 @@ public class AdminController {
     }
 
     @RequestMapping("/addCustomer")
-    public String addCustomer() {
+    public String addCustomer(@ModelAttribute("admin") Admin admin, Model model) {
+        model.addAttribute("admin", admin);
         return "admin/addCustomer";
     }
 
     @RequestMapping("/checkCustomer")
-    public String checkCustomer(Model model) {
+    public String checkCustomer(@ModelAttribute("admin") Admin admin, Model model) {
         List<Customer> customerList = adminService.getCustomerList();
         model.addAttribute("customerList", customerList);
+        model.addAttribute("admin", admin);
         return "admin/checkCustomer";
-    }
-
-    @RequestMapping("/adminLogout")
-    public String adminLogout() {
-        return "redirect:home";
     }
 
     @RequestMapping(value = "/registerCustomer", method = RequestMethod.POST)

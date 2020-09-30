@@ -37,7 +37,7 @@
                             </button>
                         </form>
 
-                        <form action="transaction" class="align-self-md-center">
+                        <form action="transaction" class="align-self-md-center" method="post">
                             <input type="hidden" name="accountNo" value=${accountNo}>
                             <button type="submit" class="btn btn-secondary btn-lg">
                                 Do Transaction

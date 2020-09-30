@@ -154,16 +154,14 @@ public class TransactionController {
             return "customer/transfer";
         }
 
-        float previousAmount = sender.getCurrentBalance();
-
-        if (previousAmount < amount) {
+        if (sender.getCurrentBalance() < amount) {
             model.addAttribute("msg", "Unsuccessful Transaction, Amount Not Enough");
             model.addAttribute("accountNo", accountNo);
             return "customer/transfer";
         }
 
-        sender.setCurrentBalance(previousAmount - amount);
-        receiver.setCurrentBalance(previousAmount + amount);
+        sender.setCurrentBalance(sender.getCurrentBalance() - amount);
+        receiver.setCurrentBalance(receiver.getCurrentBalance() + amount);
 
         customerService.updateCustomer(sender);
         customerService.updateCustomer(receiver);

@@ -34,7 +34,7 @@
                     </form>
 
                     <div class="offset-md-4">
-                    <form action="transaction" class="align-self-md-center">
+                    <form action="transaction" class="align-self-md-center" method="post">
                         <input type="hidden" name="accountNo" value=${accountNo}>
                         <button type="submit" class="btn btn-primary btn-lg">
                             Back

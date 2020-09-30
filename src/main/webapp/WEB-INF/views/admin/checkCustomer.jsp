@@ -43,11 +43,14 @@
                 </tbody>
             </table>
             <div class="align-self-lg-center">
-            <form action="adminPanel" class="align-self-md-center">
-                <button type="submit" class="btn btn-secondary btn-lg">
-                    AdminPanel
-                </button>
-            </form>
+                <div class="offset-md-5">
+                    <form action="adminPanel" class="align-self-md-center">
+                        <input type="hidden" name="admin" value="${admin}">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            Back
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

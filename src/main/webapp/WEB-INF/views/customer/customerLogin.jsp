@@ -1,8 +1,6 @@
-<%--
-  Created By Puri_Himal
---%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page isELIgnored="false" %>
 <html>
 <head>
   <title>Login</title>
@@ -15,6 +13,7 @@
       <div class="card">
         <div class="card-body px-5" style="background-color:#1bc44e">
           <h3 class="text-center my-3">Customer Login</h3>
+          <h5 class="text-center my-3" style="background-color:#189e06">${msg}</h5>
           <form action="customerPanel" method="post">
             <div class="form-group">
               <label for="accountNo">Customer Account Number</label>

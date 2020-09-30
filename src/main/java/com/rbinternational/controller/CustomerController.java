@@ -48,12 +48,13 @@ public class CustomerController {
             model.addAttribute("accountNo", customer.getAccountNo());
             return "customer/customerPanel";
         }
-        return "redirect:customerButton";
+        model.addAttribute("msg", "Incorrect AccountNo or Password");
+        return "customer/customerLogin";
     }
 
     // It display which types of transaction you want to perform
     // withdrawal, deposit, transfer
-    @RequestMapping(value = "/transaction")
+    @RequestMapping(value = "/transaction", method = RequestMethod.POST)
     public String doTransaction(@RequestParam("accountNo") int accountNo, Model model) {
         model.addAttribute("accountNo", accountNo);
         model.addAttribute("password", customerService.getCustomer(accountNo).getPassword());
