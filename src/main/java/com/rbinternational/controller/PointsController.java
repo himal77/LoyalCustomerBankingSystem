@@ -36,7 +36,7 @@ import java.util.List;
 public class PointsController {
 
     @Autowired
-    TransactionController transactionController;
+    private TransactionController transactionController;
 
     @Autowired
     private CustomerService customerService;
