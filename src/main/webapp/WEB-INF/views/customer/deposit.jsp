@@ -19,13 +19,13 @@
                         <div class="form-group">
                             <label for="amount">Amount</label>
                             <input name="amount" step="0.01" type="number" class="form-control"
-                                   id="amount" placeholder="Enter the amount">
+                                   id="amount" placeholder="Enter the amount" required>
                         </div>
 
                         <div class="form-group">
                             <label for="date">Date</label>
                             <input name="date" type="date" class="form-control"
-                                   id="date" placeholder="Enter user password">
+                                   id="date" required>
                         </div>
                         <input type="hidden" name="accountNo" value=${accountNo}>
                         <div class="container text-center">

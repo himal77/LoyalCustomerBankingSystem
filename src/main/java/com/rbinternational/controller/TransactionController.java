@@ -15,9 +15,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.concurrent.TimeUnit;
+
+// This controller has mapping for only transaction
+// doTransfer
+// doDeposit
+// doWithdrawal
+
+// This while conducting transaction, it ll calculate points
+// Point calculate for sender only with withdrawal and deposit
+// Point calculated for sender and receiver for transfer
+
+// It calculates points for each customer and save
+// It will save the points history as well
 
 @Controller
 public class TransactionController {
@@ -175,18 +185,6 @@ public class TransactionController {
         return "customer/transfer";
     }
 
-    // To convert the String date getting from form to Date of java.util
-//    public Date convertDate(String d) {
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-//        Date date = null;
-//        try {
-//            date = formatter.parse(d);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        return date;
-//    }
-
     // Comparing two dates with the day difference
     public int compareDate(Date d1, Date d2) {
         int durationFromLastTransaction = 0;
@@ -198,8 +196,6 @@ public class TransactionController {
         }
         return durationFromLastTransaction;
     }
-
-
 
     // Calculating the points after each transaction and placing in points table
     public void calculatePointAndSave(Points points, float amount, Date date, int accountNo) {
@@ -232,7 +228,7 @@ public class TransactionController {
         }
     }
 
-    // Calculating the points after each transaction
+    // Calculating the points after each transaction and save point history
     public float calculatePoint(float previousTransaction, float amount, Date date, int accountNo) {
         if ((previousTransaction + amount) <= 5000.0) {
 

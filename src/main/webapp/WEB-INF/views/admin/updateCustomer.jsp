@@ -11,23 +11,23 @@
       <form action="updateCustomer" method="post">
         <div class="form-group">
           <label for="AccountNumber">Account Number</label>
-          <input type="number" name="accountNo" class="form-control" id="AccountNumber" value=${customer.accountNo}>
+          <input type="number" name="accountNo" class="form-control" required id="AccountNumber" value=${customer.accountNo}>
         </div>
         <div class="form-group">
           <label for="CustomerName">Customer Name</label>
-          <input type="text" name="name" class="form-control" id="CustomerName" value=${customer.name}>
+          <input type="text"  name="name" class="form-control" required id="CustomerName" value=${customer.name}>
         </div>
         <div class="form-group">
           <label for="address">Address</label>
-          <input type="text" name="address" class="form-control" id="address" value=${customer.address}>
+          <input type="text" name="address" class="form-control" required id="address" value=${customer.address}>
         </div>
         <div class="form-group">
           <label for="currentBalance">Balance</label>
-          <input type="number" step="0.01" name="currentBalance" class="form-control" id="currentBalance" value=${customer.currentBalance}>
+          <input type="number" step="0.01" name="currentBalance" class="form-control" id="currentBalance"  required value=${customer.currentBalance}>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" name="password" class="form-control" id="password" value=${customer.password}>
+          <input type="password" name="password" class="form-control" id="password" required value=${customer.password}>
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
       </form>

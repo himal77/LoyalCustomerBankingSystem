@@ -20,13 +20,13 @@
             <div class="form-group">
               <label for="username">Admin Username</label>
               <input name="userName" type="text" class="form-control"
-                     id="username" placeholder="Enter user username">
+                     id="username" placeholder="Enter user username" required>
             </div>
 
             <div class="form-group">
               <label for="password">Admin Password</label>
               <input name="password" type="password" class="form-control"
-                     id="password" placeholder="Enter user password">
+                     id="password" placeholder="Enter user password" required>
             </div>
             <div class="container text-center">
               <button type="submit" class="btn btn-info">Login</button>

@@ -14,6 +14,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.ArrayList;
 import java.util.List;
 
+// This is for customer
+// It handles six mapping
+
+// customerPanel
+// transaction
+// withdrawal
+// deposit
+// transfer
+// viewTransaction
+
+// All the mapping here is for view purpose,
+// withdrawal, deposit, transfer is used to display the form for doing transaction
+// viewTransaction is the main mapping in this controller,
+// Which display the history of transaction of the customer
+
 @Controller
 public class CustomerController {
 
@@ -24,6 +39,8 @@ public class CustomerController {
     private TransactionService transactionService;
 
 
+    // It display customer panel
+    // viewPoints, viewPointsHistory, Transaction and doTransaction
     @RequestMapping(value = "/customerPanel", method = RequestMethod.POST)
     public String getCustomer(@RequestParam("accountNo") int accountNo, @RequestParam("password") String password, Model model) {
         Customer customer = customerService.getCustomerByAccountNoAndPassword(accountNo, password);
@@ -34,6 +51,8 @@ public class CustomerController {
         return "redirect:customerButton";
     }
 
+    // It display which types of transaction you want to perform
+    // withdrawal, deposit, transfer
     @RequestMapping(value = "/transaction")
     public String doTransaction(@RequestParam("accountNo") int accountNo, Model model) {
         model.addAttribute("accountNo", accountNo);
@@ -41,6 +60,7 @@ public class CustomerController {
         return "customer/transaction";
     }
 
+    // Display withdrawal form
     @RequestMapping("/withdrawal")
     public String withdrawal(@RequestParam("accountNo") int accountNo, Model model) {
         model.addAttribute("accountNo", accountNo);
@@ -48,12 +68,14 @@ public class CustomerController {
         return "customer/withdrawal";
     }
 
+    // Display deposit from
     @RequestMapping("/deposit")
     public String deposit(@RequestParam("accountNo") int accountNo, Model model) {
         model.addAttribute("accountNo", accountNo);
         return "customer/deposit";
     }
 
+    // Display transfer form
     @RequestMapping("/transfer")
     public String transfer(@RequestParam("accountNo") int accountNo, Model model) {
         model.addAttribute("accountNo", accountNo);
@@ -72,17 +94,15 @@ public class CustomerController {
         float incoming = 0.0f;
 
         for (Transaction t : sentTransactionList) {
-            if (t.getAmount() < 0) {
-                outgoing += (t.getAmount() * -1);   // Transferred and Withdrawal
+            if(t.getType().equals("Deposit")) {
+                incoming += t.getAmount();
             } else {
-                incoming += t.getAmount();          // withdrawal
+                outgoing += t.getAmount();
             }
-
         }
 
         for (Transaction t : receivedTransactionList) {
-            t.setAmount(t.getAmount() * -1);
-            incoming += t.getAmount();       // Received from another account
+            incoming += t.getAmount();      // Received from another account
         }
 
         // Combining both transaction

@@ -17,10 +17,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+
+// This class maps four request
+// doCollect
+// collectPoints
+// viewPoints
+// viewPointsHistory
+
+// doCollect is where the collection part is completed.
+// All the requirement for collecting point is given here
+// Here, it is also checked if the customer has more than 500 transaction this week
+// it checks, if the customer has transaction every day in this week
+// if all the requirement is fulfilled, then points is added to customer account
+
 
 @Controller
 public class PointsController {
+
+    @Autowired
+    TransactionController transactionController;
+
     @Autowired
     private CustomerService customerService;
 
@@ -33,12 +49,14 @@ public class PointsController {
     @Autowired
     private PointsHistoryService pointsHistoryService;
 
+    // This is view page for collecting points
     @RequestMapping("/collectPoints")
     public String collectPoints(@RequestParam("accountNo") int accountNo, Model model) {
         model.addAttribute("accountNo", accountNo);
         return "customer/collectPoints";
     }
 
+    // This mapping is for viewing the points history of particular customer
     @RequestMapping("/viewPointsHistory")
     public String viewPointHistory(@RequestParam("accountNo") int accountNo, Model model) {
         List<PointsHistory> pointsHistoryList = pointsHistoryService.getPointsHistoryList(customerService.getCustomer(accountNo));
@@ -58,6 +76,7 @@ public class PointsController {
         return "customer/viewPoints";
     }
 
+    // adding point to customer account, if all the requirement is fulfilled
     @RequestMapping("/doCollect")
     public String doCollect(@RequestParam("accountNo") int accountNo,
                             @RequestParam("date") String date,
@@ -78,7 +97,7 @@ public class PointsController {
         // To Stimulate real life banking system
         // Date cannot be older than last transaction date
         if (points != null) {
-            if (compareDate(d, points.getLastDateOfTransaction()) < 0) {
+             if(transactionController.compareDate(d, points.getLastDateOfTransaction()) < 0){
                 model.addAttribute("msg", "Please enter newer date from last transaction!");
                 model.addAttribute("accountNo", accountNo);
 
@@ -86,7 +105,7 @@ public class PointsController {
             }
         }
 
-        // If given point is not enough then available point, return
+        // If given point is not enough than available point, return
         if (p > points.getCurrAvailablePoints()) {
             model.addAttribute("msg", "Excess point than available");
             model.addAttribute("accountNo", accountNo);
@@ -109,8 +128,9 @@ public class PointsController {
         }
 
 
+        // When all requirement are fulfilled, the point added
         // Updating account with new balance
-        float amount = p / 100;
+        float amount = p / 100.0f;
         Customer customer = customerService.getCustomer(accountNo);
         customer.setCurrentBalance(customer.getCurrentBalance() + amount);
         customerService.updateCustomer(customer);
@@ -119,8 +139,9 @@ public class PointsController {
         Transaction transaction = new Transaction(amount, d, "Points added", customer, customer);
         transactionService.insertTransaction(transaction);
 
-
         // Updating points table
+        // Adding point of points
+        transactionController.calculatePointAndSave(points, amount, d, accountNo);
         points.setUsedPoints(p);
         points.setCurrAvailablePoints(points.getCurrAvailablePoints() - p);
         pointsService.update(points);
@@ -158,18 +179,5 @@ public class PointsController {
             total += t.getAmount();
         }
         return total >= 500.0f;
-    }
-
-
-    // Comparing two dates with the day difference
-    public int compareDate(Date d1, Date d2) {
-        int durationFromLastTransaction = 0;
-        try {
-            long diff = d1.getTime() - d2.getTime();
-            durationFromLastTransaction = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return durationFromLastTransaction;
     }
 }

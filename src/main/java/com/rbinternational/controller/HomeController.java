@@ -3,6 +3,13 @@ package com.rbinternational.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+// This controller handler 3 mapping
+// customerButton
+// adminButton
+// adminRegisterButton
+
+// Displaying related page for admin, register admin and customer
+
 @Controller
 public class HomeController {
 

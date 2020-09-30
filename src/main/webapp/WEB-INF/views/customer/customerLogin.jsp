@@ -19,13 +19,13 @@
             <div class="form-group">
               <label for="accountNo">Customer Account Number</label>
               <input name="accountNo" type="number" class="form-control"
-                     id="accountNo" placeholder="Enter user account number">
+                     id="accountNo" placeholder="Enter user account number" required>
             </div>
 
             <div class="form-group">
               <label for="password">Customer Password</label>
               <input name="password" type="password" class="form-control"
-                     id="password" placeholder="Enter user password">
+                     id="password" placeholder="Enter user password" required>
             </div>
             <div class="container text-center">
               <button type="submit" class="btn btn-info">Login</button>
