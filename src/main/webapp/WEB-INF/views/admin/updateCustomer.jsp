@@ -1,3 +1,6 @@
+<%--
+  Created By Puri_Himal
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page isELIgnored="false" %>
@@ -8,11 +11,12 @@
 <div class="container w-50">
     <div class="container-fluid">
         <div class="card-body">
+            <h3 class="text-center my-3">Customer Update</h3>
+            <h5 class="text-center my-3" style="background-color:#189e06">${msg}</h5>
             <form action="updateCustomer" method="post">
                 <div class="form-group">
-                    <label for="AccountNumber">Account Number</label>
-                    <input type="number" name="accountNo" class="form-control" required id="AccountNumber"
-                           value=${customer.accountNo}>
+                    <label>Account Number: ${customer.accountNo}</label>
+                    <input type="hidden" name="accountNo" value="${customer.accountNo}">
                 </div>
                 <div class="form-group">
                     <label for="CustomerName">Customer Name</label>
@@ -35,12 +39,15 @@
                            value=${customer.password}>
                 </div>
                 <div class="offset-md-5">
+                    <input type="hidden" name="userName" value="${admin.userName}">
+                    <input type="hidden" name="password" value="${admin.password}">
                     <button type="submit" class="btn btn-primary">Update</button>
                 </div>
             </form>
             <div class="offset-md-5">
-                <form action="adminPanel" class="align-self-md-center">
-                    <input type="hidden" name="admin" value="${admin}">
+                <form action="checkCustomer" class="align-self-md-center" method="post">
+                    <input type="hidden" name="userName" value="${admin.userName}">
+                    <input type="hidden" name="password" value="${admin.password}">
                     <button type="submit" class="btn  btn-danger btn-lg">
                         Back
                     </button>

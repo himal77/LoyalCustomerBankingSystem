@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
@@ -50,14 +51,14 @@ public class PointsController {
     private PointsHistoryService pointsHistoryService;
 
     // This is view page for collecting points
-    @RequestMapping("/collectPoints")
+    @RequestMapping(value = "/collectPoints", method = RequestMethod.POST)
     public String collectPoints(@RequestParam("accountNo") int accountNo, Model model) {
         model.addAttribute("accountNo", accountNo);
         return "customer/collectPoints";
     }
 
     // This mapping is for viewing the points history of particular customer
-    @RequestMapping("/viewPointsHistory")
+    @RequestMapping(value = "/viewPointsHistory", method = RequestMethod.POST)
     public String viewPointHistory(@RequestParam("accountNo") int accountNo, Model model) {
         List<PointsHistory> pointsHistoryList = pointsHistoryService.getPointsHistoryList(customerService.getCustomer(accountNo));
         model.addAttribute("pointsHistoryList", pointsHistoryList);
@@ -67,7 +68,7 @@ public class PointsController {
     }
 
     // Viewing available or pending points
-    @RequestMapping("/viewPoints")
+    @RequestMapping(value = "/viewPoints", method = RequestMethod.POST)
     public String viewPoints(@RequestParam("accountNo") int accountNo, Model model) {
         Points points = pointsService.getPointOfCustomer(accountNo);
         model.addAttribute("points", points);
@@ -77,7 +78,7 @@ public class PointsController {
     }
 
     // adding point to customer account, if all the requirement is fulfilled
-    @RequestMapping("/doCollect")
+    @RequestMapping(value = "/doCollect", method = RequestMethod.POST)
     public String doCollect(@RequestParam("accountNo") int accountNo,
                             @RequestParam("date") String date,
                             @RequestParam("points") float p,

@@ -1,3 +1,6 @@
+<%--
+  Created By Puri_Himal
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page isELIgnored="false" %>
 <html>
@@ -16,21 +19,21 @@
 
                     <div class="form-row">
 
-                        <form action="viewPointsHistory" class="align-self-md-center">
+                        <form action="viewPointsHistory" class="align-self-md-center" method="post">
                             <input type="hidden" name="accountNo" value=${accountNo}>
                             <button type="submit" class="btn btn-secondary btn-lg">
                                 View Points History
                             </button>
                         </form>
 
-                        <form action="viewPoints" class="align-self-md-center">
+                        <form action="viewPoints" class="align-self-md-center" method="post">
                             <input type="hidden" name="accountNo" value=${accountNo}>
                             <button type="submit" class="btn btn-secondary btn-lg">
                                 View Points
                             </button>
                         </form>
 
-                        <form action="viewTransaction" class="align-self-md-center">
+                        <form action="viewTransaction" class="align-self-md-center" method="post">
                             <input type="hidden" name="accountNo" value=${accountNo}>
                             <button type="submit" class="btn btn-secondary btn-lg">
                                 View Transaction

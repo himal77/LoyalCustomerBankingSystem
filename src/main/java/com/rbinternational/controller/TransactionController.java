@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
@@ -43,7 +44,7 @@ public class TransactionController {
     @Autowired
     private PointsHistoryService pointsHistoryService;
 
-    @RequestMapping("/doDeposit")
+    @RequestMapping(value = "/doDeposit", method = RequestMethod.POST)
     public String doDeposit(@RequestParam("amount") float amount,
                             @RequestParam("date") String date,
                             @RequestParam("accountNo") int accountNo,
@@ -82,7 +83,7 @@ public class TransactionController {
         return "customer/deposit";
     }
 
-    @RequestMapping("/doWithdrawal")
+    @RequestMapping(value = "/doWithdrawal", method = RequestMethod.POST)
     public String doWithdrawal(@RequestParam("amount") float amount,
                                @RequestParam("date") String date,
                                @RequestParam("accountNo") int accountNo,
@@ -125,7 +126,7 @@ public class TransactionController {
         return "customer/withdrawal";
     }
 
-    @RequestMapping("/doTransfer")
+    @RequestMapping(value = "/doTransfer", method = RequestMethod.POST)
     public String doTransfer(@RequestParam("amount") float amount,
                              @RequestParam("date") String date,
                              @RequestParam("accountNo") int accountNo,

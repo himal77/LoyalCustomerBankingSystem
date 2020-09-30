@@ -1,3 +1,6 @@
+<%--
+  Created By Puri_Himal
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page isELIgnored="false" %>
 <html>
@@ -15,15 +18,17 @@
                 <div class="card-body px-2" style="background-color:#95d66d">
                     <h3 class="text-center my-3">Admin Panel</h3>
                     <div class="form-row">
-                        <form action="addCustomer" class="align-self-md-center">
-                            <input type="hidden" value="${admin}">
+                        <form action="addCustomer" class="align-self-md-center" method="post">
+                            <input type="hidden" name="userName" value="${admin.userName}">
+                            <input type="hidden" name="password" value="${admin.password}">
                             <button type="submit" class="btn btn-secondary btn-lg">
                                 Add Customer
                             </button>
                         </form>
 
-                        <form action="checkCustomer" class="align-self-md-center">
-                            <input type="hidden" value="${admin}">
+                        <form action="checkCustomer" class="align-self-md-center" method="post">
+                            <input type="hidden" name="userName" value="${admin.userName}">
+                            <input type="hidden" name="password" value="${admin.password}">
                             <button type="submit" class="btn btn-secondary btn-lg">
                                 Check Customer
                             </button>

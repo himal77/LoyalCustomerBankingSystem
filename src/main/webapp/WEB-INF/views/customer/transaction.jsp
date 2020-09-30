@@ -1,3 +1,6 @@
+<%--
+  Created By Puri_Himal
+--%>
 <%@ page import="com.rbinternational.model.Customer" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page isELIgnored="false" %>
@@ -17,21 +20,21 @@
 
                     <div class="form-row">
 
-                        <form action="withdrawal" class="align-self-md-center">
+                        <form action="withdrawal" class="align-self-md-center", method="post">
                             <input type="hidden" name="accountNo" value=${accountNo}>
                             <button type="submit" class="btn btn-secondary btn-lg">
                                 Withdraw
                             </button>
                         </form>
 
-                        <form action="deposit" class="align-self-md-center">
+                        <form action="deposit" class="align-self-md-center", method="post">
                             <input type="hidden" name="accountNo" value=${accountNo}>
                             <button type="submit" class="btn btn-secondary btn-lg">
                                 Deposit
                             </button>
                         </form>
 
-                        <form action="transfer" class="align-self-md-center">
+                        <form action="transfer" class="align-self-md-center", method="post">
                             <input type="hidden" name="accountNo" value=${accountNo}>
                             <button type="submit" class="btn btn-secondary btn-lg">
                                 Transfer

@@ -20,17 +20,27 @@ public class AdminController {
     private AdminService adminService;
 
     @RequestMapping(value = "/registerAdmin", method = RequestMethod.POST)
-    public String admin(@ModelAttribute Admin admin) {
-        if(this.adminService.addAdmin(admin) == 1) return "redirect:adminButton";
+    public String admin(@ModelAttribute Admin admin, Model model) {
+        if (this.adminService.getAdmin(admin) != null) {
+            model.addAttribute("msg", admin.getUserName() + " is already registered");
+            return "admin/adminRegister";
+        }
+        if (this.adminService.addAdmin(admin) == 1) {
+            model.addAttribute("msg", "admin registration successful");
+            return "admin/adminRegister";
+        }
         return "redirect:adminRegisterButton";
     }
 
     @RequestMapping(value = "/adminPanel", method = RequestMethod.POST)
     public String adminLoginPost(@ModelAttribute Admin admin, Model model) {
+        if (this.adminService.getAdmin(admin) == null) {
+            model.addAttribute("msg", "Invalid username or password");
+            return "admin/adminLogin";
+        }
         model.addAttribute("userName", admin.getUserName());
         model.addAttribute("password", admin.getPassword());
         model.addAttribute("admin", admin);
-        if(this.adminService.getAdmin(admin) == null) return "redirect:adminButton";
         return "admin/adminPanel";
     }
 
@@ -54,10 +64,17 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/registerCustomer", method = RequestMethod.POST)
-    public String registerCustomer(@ModelAttribute Customer customer, Model m) {
+    public String registerCustomer(@ModelAttribute Customer customer, Model m, @ModelAttribute Admin admin) {
+        m.addAttribute("admin", admin);
+        if (adminService.getCustomer(customer.getAccountNo()) != null) {
+            m.addAttribute("msg", "This customer is already registered!");
+            return "admin/addCustomer";
+        }
+        List<Customer> customerList = adminService.getCustomerList();
+        m.addAttribute("customerList", customerList);
 
-        if(adminService.addCustomer(customer) == 1){
-            return "redirect:checkCustomer";
+        if (adminService.addCustomer(customer) == 1) {
+            return "admin/checkCustomer";
         }
         m.addAttribute("msg", "Customer addition unsuccessful");
         return "message";
@@ -70,15 +87,19 @@ public class AdminController {
     }
 
     @RequestMapping("/updateCustomerReq")
-    public String updateCustomer(@RequestParam("accountNo") int accountNo, Model model) {
-       Customer customer = adminService.getCustomer(accountNo);
-       model.addAttribute("customer", customer);
+    public String updateCustomer(@RequestParam("accountNo") int accountNo, @ModelAttribute Admin admin, Model model) {
+        Customer customer = adminService.getCustomer(accountNo);
+        model.addAttribute("admin", admin);
+        model.addAttribute("customer", customer);
         return "admin/updateCustomer";
     }
 
     @RequestMapping(value = "/updateCustomer", method = RequestMethod.POST)
-    public String updateCustomer(@ModelAttribute Customer customer) {
+    public String updateCustomer(@ModelAttribute Customer customer, @ModelAttribute Admin admin, Model model) {
         adminService.updateCustomer(customer);
-        return "redirect:checkCustomer";
+        model.addAttribute("admin", admin);
+        List<Customer> customerList = adminService.getCustomerList();
+        model.addAttribute("customerList", customerList);
+        return "admin/checkCustomer";
     }
 }

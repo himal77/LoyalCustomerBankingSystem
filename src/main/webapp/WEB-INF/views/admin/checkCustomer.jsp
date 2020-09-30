@@ -1,3 +1,6 @@
+<%--
+  Created By Puri_Himal
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page isELIgnored="false" %>
@@ -28,11 +31,15 @@
                         <td>${customer.currentBalance}</td>
                         <td>
                             <div class="form-row" >
-                                <form action="deleteCustomerReq" onsubmit="return confirm('Do you really want to delete?');">
+                                <form action="deleteCustomerReq" onsubmit="return confirm('Do you really want to delete?');" method="post">
+                                    <input type="hidden" name="userName" value="${admin.userName}">
+                                    <input type="hidden" name="password" value="${admin.password}">
                                     <input type="hidden" name="accountNo" value=${customer.accountNo}>
                                     <button type="submit">Delete</button>
                                 </form>
-                                <form action="updateCustomerReq">
+                                <form action="updateCustomerReq" method="post">
+                                    <input type="hidden" name="userName" value="${admin.userName}">
+                                    <input type="hidden" name="password" value="${admin.password}">
                                     <input type="hidden" name="accountNo" value=${customer.accountNo}>
                                     <button type="submit">Update</button>
                                 </form>
@@ -44,8 +51,9 @@
             </table>
             <div class="align-self-lg-center">
                 <div class="offset-md-5">
-                    <form action="adminPanel" class="align-self-md-center">
-                        <input type="hidden" name="admin" value="${admin}">
+                    <form action="adminPanel" class="align-self-md-center" method="post">
+                        <input type="hidden" name="userName" value="${admin.userName}">
+                        <input type="hidden" name="password" value="${admin.password}">
                         <button type="submit" class="btn btn-primary btn-lg">
                             Back
                         </button>

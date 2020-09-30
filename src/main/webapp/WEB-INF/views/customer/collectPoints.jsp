@@ -1,3 +1,6 @@
+<%--
+  Created By Puri_Himal
+--%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page isELIgnored="false" %>
@@ -34,7 +37,7 @@
                         </div>
                     </form>
                     <div class="offset-md-4">
-                        <form action="viewPoints" class="align-self-md-center">
+                        <form action="viewPoints" class="align-self-md-center" method="post">
                             <input type="hidden" name="accountNo" value=${accountNo}>
                             <button type="submit" class="btn btn-primary btn-lg">
                                 Back

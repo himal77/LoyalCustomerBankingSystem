@@ -62,7 +62,7 @@ public class CustomerController {
     }
 
     // Display withdrawal form
-    @RequestMapping("/withdrawal")
+    @RequestMapping(value = "/withdrawal", method = RequestMethod.POST)
     public String withdrawal(@RequestParam("accountNo") int accountNo, Model model) {
         model.addAttribute("accountNo", accountNo);
         // model.addAttribute("msg", "This is the message");
@@ -70,21 +70,21 @@ public class CustomerController {
     }
 
     // Display deposit from
-    @RequestMapping("/deposit")
+    @RequestMapping(value = "/deposit", method = RequestMethod.POST)
     public String deposit(@RequestParam("accountNo") int accountNo, Model model) {
         model.addAttribute("accountNo", accountNo);
         return "customer/deposit";
     }
 
     // Display transfer form
-    @RequestMapping("/transfer")
+    @RequestMapping(value = "/transfer", method = RequestMethod.POST)
     public String transfer(@RequestParam("accountNo") int accountNo, Model model) {
         model.addAttribute("accountNo", accountNo);
         return "customer/transfer";
     }
 
     // View transaction handler or controller
-    @RequestMapping("/viewTransaction")
+    @RequestMapping(value = "/viewTransaction", method = RequestMethod.POST)
     public String viewTransaction(@RequestParam("accountNo") int accountNo, Model model) {
 
         Customer customer = customerService.getCustomer(accountNo);
