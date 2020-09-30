@@ -33,13 +33,13 @@
                             <div class="form-row" >
                                 <form action="deleteCustomerReq" onsubmit="return confirm('Do you really want to delete?');" method="post">
                                     <input type="hidden" name="userName" value="${admin.userName}">
-                                    <input type="hidden" name="password" value="${admin.password}">
+                                    <input type="hidden" name="kennwort" value="${admin.kennwort}">
                                     <input type="hidden" name="accountNo" value=${customer.accountNo}>
                                     <button type="submit">Delete</button>
                                 </form>
                                 <form action="updateCustomerReq" method="post">
                                     <input type="hidden" name="userName" value="${admin.userName}">
-                                    <input type="hidden" name="password" value="${admin.password}">
+                                    <input type="hidden" name="kennwort" value="${admin.kennwort}">
                                     <input type="hidden" name="accountNo" value=${customer.accountNo}>
                                     <button type="submit">Update</button>
                                 </form>
@@ -53,7 +53,7 @@
                 <div class="offset-md-5">
                     <form action="adminPanel" class="align-self-md-center" method="post">
                         <input type="hidden" name="userName" value="${admin.userName}">
-                        <input type="hidden" name="password" value="${admin.password}">
+                        <input type="hidden" name="kennwort" value="${admin.kennwort}">
                         <button type="submit" class="btn btn-primary btn-lg">
                             Back
                         </button>

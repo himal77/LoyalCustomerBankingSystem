@@ -2,13 +2,13 @@
   Created By Puri_Himal
 --%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@page isELIgnored="false" %>
 <html>
 <head>
     <%@include file="/components/common.jsp" %>
 </head>
 <div class="container w-50">
     <div class="container-fluid">
-        <%@include file="/WEB-INF/views/message.jsp" %>
         <div class="card-body">
             <h3 class="text-center my-3">Customer Registration</h3>
             <h5 class="text-center my-3" style="background-color:#189e06">${msg}</h5>
@@ -36,14 +36,14 @@
                 </div>
                 <div class="offset-md-5">
                     <input type="hidden" name="userName" value="${admin.userName}">
-                    <input type="hidden" name="password" value="${admin.password}">
+                    <input type="hidden" name="kennwort" value="${admin.kennwort}">
                     <button type="submit" class="btn btn-primary btn-lg">Insert</button>
                 </div>
             </form>
             <div class="offset-md-5">
                 <form action="adminPanel" class="align-self-md-center" method="post">
                     <input type="hidden" name="userName" value="${admin.userName}">
-                    <input type="hidden" name="password" value="${admin.password}">
+                    <input type="hidden" name="kennwort" value="${admin.kennwort}">
                     <button type="submit" class="btn  btn-danger btn-lg">
                         Back
                     </button>

@@ -162,12 +162,14 @@ public class PointsController {
             for(Transaction t: transactionList) {
                  if(t.getDate().equals(dd)) {
                      isEveryDay[i] = true;
+                     System.out.println(isEveryDay[i]);
                      break;
                  }
              }
         }
 
         for(int i = 0; i < 7; i++) {
+
             if(!isEveryDay[i]) return false;
         }
         return true;

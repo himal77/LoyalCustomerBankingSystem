@@ -13,6 +13,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+// This controller handles all of the 8 request mapping of admin
+
+// registerAdmin
+// adminPanel
+// addCustomer
+// checkCustomer
+// registerCustomer
+// deleteCustomerReq
+// updateCustomerReq
+// updateCustomer
+
+
+
 @Controller
 public class AdminController {
 
@@ -22,7 +35,7 @@ public class AdminController {
     @RequestMapping(value = "/registerAdmin", method = RequestMethod.POST)
     public String admin(@ModelAttribute Admin admin, Model model) {
         if (this.adminService.getAdmin(admin) != null) {
-            model.addAttribute("msg", admin.getUserName() + " is already registered");
+            model.addAttribute("msg", "User is already registered");
             return "admin/adminRegister";
         }
         if (this.adminService.addAdmin(admin) == 1) {
@@ -39,15 +52,11 @@ public class AdminController {
             return "admin/adminLogin";
         }
         model.addAttribute("userName", admin.getUserName());
-        model.addAttribute("password", admin.getPassword());
+        model.addAttribute("kennwort", admin.getKennwort());
         model.addAttribute("admin", admin);
         return "admin/adminPanel";
     }
 
-    @RequestMapping(value = "/adminPanel", method = RequestMethod.GET)
-    public String adminLoginPost() {
-        return "admin/adminPanel";
-    }
 
     @RequestMapping("/addCustomer")
     public String addCustomer(@ModelAttribute("admin") Admin admin, Model model) {
@@ -70,26 +79,29 @@ public class AdminController {
             m.addAttribute("msg", "This customer is already registered!");
             return "admin/addCustomer";
         }
+
+
+        adminService.addCustomer(customer);
         List<Customer> customerList = adminService.getCustomerList();
         m.addAttribute("customerList", customerList);
+        return "admin/checkCustomer";
 
-        if (adminService.addCustomer(customer) == 1) {
-            return "admin/checkCustomer";
-        }
-        m.addAttribute("msg", "Customer addition unsuccessful");
-        return "message";
     }
 
     @RequestMapping("/deleteCustomerReq")
-    public String deleteCustomer(@RequestParam("accountNo") int accountNo) {
+    public String deleteCustomer(@RequestParam("accountNo") int accountNo, @ModelAttribute Admin admin, Model model) {
         adminService.deleteCustomer(accountNo);
-        return "redirect:checkCustomer";
+        model.addAttribute("admin", admin);
+        List<Customer> customerList = adminService.getCustomerList();
+        model.addAttribute("customerList", customerList);
+        return "admin/checkCustomer";
     }
 
     @RequestMapping("/updateCustomerReq")
     public String updateCustomer(@RequestParam("accountNo") int accountNo, @ModelAttribute Admin admin, Model model) {
         Customer customer = adminService.getCustomer(accountNo);
         model.addAttribute("admin", admin);
+        System.out.println(customer);
         model.addAttribute("customer", customer);
         return "admin/updateCustomer";
     }

@@ -21,12 +21,12 @@
                 <div class="form-group">
                     <label for="CustomerName">Customer Name</label>
                     <input type="text" name="name" class="form-control" required id="CustomerName"
-                           value=${customer.name}>
+                           value="${customer.name}">
                 </div>
                 <div class="form-group">
                     <label for="address">Address</label>
                     <input type="text" name="address" class="form-control" required id="address"
-                           value=${customer.address}>
+                           value="${customer.address}">
                 </div>
                 <div class="form-group">
                     <label for="currentBalance">Balance</label>
@@ -40,14 +40,14 @@
                 </div>
                 <div class="offset-md-5">
                     <input type="hidden" name="userName" value="${admin.userName}">
-                    <input type="hidden" name="password" value="${admin.password}">
+                    <input type="hidden" name="kennwort" value="${admin.kennwort}">
                     <button type="submit" class="btn btn-primary">Update</button>
                 </div>
             </form>
             <div class="offset-md-5">
                 <form action="checkCustomer" class="align-self-md-center" method="post">
                     <input type="hidden" name="userName" value="${admin.userName}">
-                    <input type="hidden" name="password" value="${admin.password}">
+                    <input type="hidden" name="kennwort" value="${admin.kennwort}">
                     <button type="submit" class="btn  btn-danger btn-lg">
                         Back
                     </button>

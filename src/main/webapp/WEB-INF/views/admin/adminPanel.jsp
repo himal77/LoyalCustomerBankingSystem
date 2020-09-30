@@ -14,13 +14,12 @@
     <div class="row mt-3">
         <div class="offset-md-4">
             <div class="card" style="background-color:#7578d9">
-                <%@include file="/WEB-INF/views/message.jsp" %>
                 <div class="card-body px-2" style="background-color:#95d66d">
                     <h3 class="text-center my-3">Admin Panel</h3>
                     <div class="form-row">
                         <form action="addCustomer" class="align-self-md-center" method="post">
                             <input type="hidden" name="userName" value="${admin.userName}">
-                            <input type="hidden" name="password" value="${admin.password}">
+                            <input type="hidden" name="kennwort" value="${admin.kennwort}">
                             <button type="submit" class="btn btn-secondary btn-lg">
                                 Add Customer
                             </button>
@@ -28,7 +27,7 @@
 
                         <form action="checkCustomer" class="align-self-md-center" method="post">
                             <input type="hidden" name="userName" value="${admin.userName}">
-                            <input type="hidden" name="password" value="${admin.password}">
+                            <input type="hidden" name="kennwort" value="${admin.kennwort}">
                             <button type="submit" class="btn btn-secondary btn-lg">
                                 Check Customer
                             </button>

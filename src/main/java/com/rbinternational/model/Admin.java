@@ -7,14 +7,14 @@ import javax.persistence.Id;
 public class Admin {
     @Id
     String userName;
-    String password;
+    String kennwort;
 
     public Admin() {
     }
 
-    public Admin(String userName, String password) {
+    public Admin(String userName, String kennwort) {
         this.userName = userName;
-        this.password = password;
+        this.kennwort = kennwort;
     }
 
     public String getUserName() {
@@ -25,19 +25,19 @@ public class Admin {
         this.userName = userName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getKennwort() {
+        return kennwort;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setKennwort(String password) {
+        this.kennwort = password;
     }
 
     @Override
     public String toString() {
         return "Admin{" +
                 "userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
+                ", password='" + kennwort + '\'' +
                 '}';
     }
 }

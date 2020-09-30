@@ -25,9 +25,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password">Admin Password</label>
-                            <input name="password" type="password" class="form-control"
-                                   id="password" placeholder="Enter user password" required>
+                            <label for="kennwort">Admin Password</label>
+                            <input name="kennwort" type="password" class="form-control"
+                                   id="kennwort" placeholder="Enter user password" required>
                         </div>
                         <div class="container text-center">
                             <button type="submit" class="btn btn-info">Register</button>

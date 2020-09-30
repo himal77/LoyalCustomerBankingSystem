@@ -15,7 +15,6 @@ public class Customer {
     private String address;
     private float currentBalance;
     private String password;
-    private Date countPointFromDate;
 
     @OneToMany(mappedBy = "customerAccount")
     private List<PointsHistory> pointsHistoryList;
@@ -75,14 +74,6 @@ public class Customer {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Date getCountPointFromDate() {
-        return countPointFromDate;
-    }
-
-    public void setCountPointFromDate(Date countPointFromDate) {
-        this.countPointFromDate = countPointFromDate;
     }
 
     @Override

@@ -29,7 +29,7 @@
                         <form action="viewPoints" class="align-self-md-center" method="post">
                             <input type="hidden" name="accountNo" value=${accountNo}>
                             <button type="submit" class="btn btn-secondary btn-lg">
-                                View Points
+                                View/Collect Points
                             </button>
                         </form>
 
